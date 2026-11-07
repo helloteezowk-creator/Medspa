@@ -1,0 +1,32 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Cormorant Garamond", Georgia, serif;
+  --font-sans: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+  --color-lumina-sand: #C5A880;
+  --color-lumina-sand-dark: #AD8E64;
+  --color-lumina-sand-light: #F6F2EC;
+  --color-lumina-bg: #FAF8F5;
+  --color-lumina-card: #FFFFFF;
+  --color-lumina-border: #EDE8E0;
+  --color-lumina-charcoal: #1C1917;
+  --color-lumina-muted: #78716C;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-family: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+}
+
+.font-display {
+  font-family: "Cormorant Garamond", Georgia, serif;
+}
+
+/* Luxury glow and subtle shadows */
+.shadow-lumina {
+  box-shadow: 0 10px 30px -10px rgba(197, 168, 128, 0.15), 0 4px 12px -2px rgba(28, 25, 23, 0.04);
+}
+
+.shadow-lumina-card {
+  box-shadow: 0 4px 20px -2px rgba(28, 25, 23, 0.04), 0 2px 6px -1px rgba(28, 25, 23, 0.02);
+}

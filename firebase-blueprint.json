@@ -1,0 +1,163 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "Patient and clinical staff user profile",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "Firebase Auth UID"
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "Patient email address"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Full name"
+        },
+        "role": {
+          "type": "string",
+          "enum": ["patient", "admin"],
+          "description": "Access level"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Account creation timestamp"
+        }
+      },
+      "required": ["userId", "email", "role", "createdAt"]
+    },
+    "Consultation": {
+      "title": "Consultation",
+      "description": "Aesthetic medical consultation booking request",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Consultation reference ID"
+        },
+        "userId": {
+          "type": "string",
+          "description": "UID of the booking user"
+        },
+        "patientName": {
+          "type": "string",
+          "maxLength": 100,
+          "description": "Patient full legal name"
+        },
+        "phone": {
+          "type": "string",
+          "maxLength": 30,
+          "description": "Patient contact telephone number"
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "Patient email address"
+        },
+        "treatments": {
+          "type": "array",
+          "description": "List of selected aesthetic procedures"
+        },
+        "preferredClinician": {
+          "type": "string",
+          "description": "Selected medical practitioner"
+        },
+        "preferredDate": {
+          "type": "string",
+          "description": "Requested appointment date"
+        },
+        "preferredTime": {
+          "type": "string",
+          "description": "Requested appointment time slot"
+        },
+        "notes": {
+          "type": "string",
+          "maxLength": 1000,
+          "description": "Patient aesthetic concerns and medical intake notes"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["new", "contacted", "scheduled", "completed", "cancelled"],
+          "description": "Workflow appointment status"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Booking submission timestamp"
+        }
+      },
+      "required": ["id", "userId", "patientName", "phone", "email", "treatments", "preferredDate", "preferredTime", "status", "createdAt"]
+    },
+    "Review": {
+      "title": "Review",
+      "description": "Verified patient testimonial and clinical experience review",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Review unique identifier"
+        },
+        "userId": {
+          "type": "string",
+          "description": "UID of the authenticated author"
+        },
+        "authorName": {
+          "type": "string",
+          "maxLength": 60,
+          "description": "Public name or initial"
+        },
+        "authorLocation": {
+          "type": "string",
+          "maxLength": 60,
+          "description": "Patient city/state"
+        },
+        "treatment": {
+          "type": "string",
+          "maxLength": 100,
+          "description": "Procedure experienced"
+        },
+        "rating": {
+          "type": "number",
+          "description": "Star score 1 to 5"
+        },
+        "comment": {
+          "type": "string",
+          "minLength": 10,
+          "maxLength": 500,
+          "description": "Unfiltered patient reflection"
+        },
+        "isVerified": {
+          "type": "boolean",
+          "description": "Verified clinical appointment status"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["published", "pending", "flagged"],
+          "description": "Moderation status"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Submission timestamp"
+        }
+      },
+      "required": ["id", "userId", "authorName", "treatment", "rating", "comment", "status", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "Patient and staff account profiles"
+    },
+    "/consultations/{consultationId}": {
+      "schema": "Consultation",
+      "description": "Private consultation appointments mapped to users"
+    },
+    "/reviews/{reviewId}": {
+      "schema": "Review",
+      "description": "Verified patient feedback with spam protection"
+    }
+  }
+}
