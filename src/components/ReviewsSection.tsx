@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { motion } from 'motion/react';
 import { Star, ShieldCheck, Quote, ChevronLeft, ChevronRight, CheckCircle2, Sparkles } from 'lucide-react';
 import { businessConfig } from '../data/businessConfig';
 
@@ -43,7 +44,13 @@ export const ReviewsSection: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+        <motion.div
+          initial={{ opacity: 0, y: 18 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-50px' }}
+          transition={{ duration: 0.6 }}
+          className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12"
+        >
           <div>
             <div className="inline-flex items-center gap-2 text-[11px] font-semibold tracking-[0.25em] text-[#A6855B] uppercase mb-2">
               <Sparkles className="w-3.5 h-3.5 text-[#C5A880]" />
@@ -79,7 +86,7 @@ export const ReviewsSection: React.FC = () => {
               <ChevronRight className="w-5 h-5" />
             </button>
           </div>
-        </div>
+        </motion.div>
 
         {/* Carousel Viewport Container */}
         <div className="relative overflow-hidden -mx-3 px-3 py-2" ref={containerRef}>

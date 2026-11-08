@@ -1,5 +1,6 @@
 import React from 'react';
-import { ArrowRight, FileText, Sparkles, Smile, ShieldCheck } from 'lucide-react';
+import { motion } from 'motion/react';
+import { FileText, Sparkles, Smile, ShieldCheck } from 'lucide-react';
 import { businessConfig } from '../data/businessConfig';
 
 export const TreatmentJourney: React.FC = () => {
@@ -23,7 +24,13 @@ export const TreatmentJourney: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         
         {/* Section Header */}
-        <div className="max-w-2xl mx-auto mb-16">
+        <motion.div
+          initial={{ opacity: 0, y: 18 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-50px' }}
+          transition={{ duration: 0.6 }}
+          className="max-w-2xl mx-auto mb-16"
+        >
           <div className="text-[11px] font-semibold tracking-[0.25em] text-[#A6855B] uppercase mb-2">
             The Patient Experience
           </div>
@@ -33,12 +40,20 @@ export const TreatmentJourney: React.FC = () => {
           <p className="text-sm text-stone-600 font-light mt-3">
             Every aesthetic journey at Lumina follows four disciplined clinical milestones to guarantee safety, satisfaction, and effortless elegance.
           </p>
-        </div>
+        </motion.div>
 
         {/* 4-Step Process Grid with Connecting Connectors matching reference */}
         <div className="relative grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-6">
           {businessConfig.journeySteps.map((step, idx) => (
-            <div key={step.number} className="relative flex flex-col items-center text-center group">
+            <motion.div
+              key={step.number}
+              initial={{ opacity: 0, y: 22 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-40px' }}
+              transition={{ delay: idx * 0.12, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+              whileHover={{ y: -4 }}
+              className="relative flex flex-col items-center text-center group cursor-default"
+            >
               
               {/* Connector line for desktop */}
               {idx < businessConfig.journeySteps.length - 1 && (
@@ -64,7 +79,7 @@ export const TreatmentJourney: React.FC = () => {
               <p className="text-xs text-stone-500 font-light leading-relaxed max-w-xs">
                 {step.description}
               </p>
-            </div>
+            </motion.div>
           ))}
         </div>
 

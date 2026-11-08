@@ -16,6 +16,7 @@ import { BookingModal } from './components/BookingModal';
 import { ClinicTourModal } from './components/ClinicTourModal';
 import { ServiceDetailModal } from './components/ServiceDetailModal';
 import { AdminPortalModal } from './components/AdminPortalModal';
+import { LuxuryPageLoader } from './components/LuxuryPageLoader';
 import { businessConfig, ServiceItem } from './data/businessConfig';
 
 export default function App() {
@@ -60,6 +61,9 @@ export default function App() {
   return (
     <div className="min-h-screen bg-[#FAF8F5] text-stone-900 flex flex-col font-sans selection:bg-[#C5A880]/30 selection:text-stone-900 w-full max-w-full overflow-x-hidden">
       
+      {/* Silk Luxury Preloader Animation */}
+      <LuxuryPageLoader />
+
       {/* 1. Sticky Navigation Header */}
       <Navbar
         onOpenBooking={() => handleOpenBooking()}

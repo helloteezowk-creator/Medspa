@@ -1,5 +1,6 @@
 import React from 'react';
-import { ArrowRight, Tag, Sparkles, CheckCircle2 } from 'lucide-react';
+import { motion } from 'motion/react';
+import { ArrowRight, Tag, CheckCircle2 } from 'lucide-react';
 
 interface SpecialOfferBannerProps {
   onClaimOffer: () => void;
@@ -11,7 +12,13 @@ export const SpecialOfferBanner: React.FC<SpecialOfferBannerProps> = ({ onClaimO
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Rounded Promo Container matching reference */}
-        <div className="relative overflow-hidden rounded-[32px] sm:rounded-[40px] bg-[#EBE5DC] border border-[#E0D8CC] shadow-lg">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-50px' }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          className="relative overflow-hidden rounded-[32px] sm:rounded-[40px] bg-[#EBE5DC] border border-[#E0D8CC] shadow-lg"
+        >
           <div className="grid grid-cols-1 lg:grid-cols-12 items-stretch">
             
             {/* Left Content Column */}
@@ -46,7 +53,7 @@ export const SpecialOfferBanner: React.FC<SpecialOfferBannerProps> = ({ onClaimO
                 <button
                   type="button"
                   onClick={onClaimOffer}
-                  className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full text-xs font-semibold tracking-wider text-white bg-stone-900 hover:bg-stone-800 shadow-md transition-all duration-200 active:scale-95 group"
+                  className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full text-xs font-semibold tracking-wider text-white bg-stone-900 hover:bg-stone-800 shadow-md transition-all duration-300 hover:scale-[1.02] active:scale-95 group cursor-pointer"
                 >
                   <span>CLAIM YOUR OFFER</span>
                   <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1 text-[#C5A880]" />
@@ -55,11 +62,11 @@ export const SpecialOfferBanner: React.FC<SpecialOfferBannerProps> = ({ onClaimO
             </div>
 
             {/* Right Photo Column: Macro Skin Glow */}
-            <div className="lg:col-span-6 relative min-h-[300px] lg:min-h-full">
+            <div className="lg:col-span-6 relative min-h-[300px] lg:min-h-full overflow-hidden group">
               <img
                 src="/images/promo_macro_radiance_1794044958044.jpg"
                 alt="Radiant dewy skin close up at Lumina Medical Spa"
-                className="w-full h-full object-cover object-center absolute inset-0"
+                className="w-full h-full object-cover object-center absolute inset-0 transform group-hover:scale-105 transition-transform duration-700"
                 referrerPolicy="no-referrer"
                 loading="lazy"
               />
@@ -68,14 +75,14 @@ export const SpecialOfferBanner: React.FC<SpecialOfferBannerProps> = ({ onClaimO
 
               {/* Subtle bottom navigation dots/tag */}
               <div className="absolute bottom-6 right-6 flex items-center gap-2 z-10">
-                <span className="px-3 py-1 rounded-full bg-white/80 backdrop-blur-md text-[10px] font-semibold uppercase tracking-wider text-stone-800 border border-white/60">
+                <span className="px-3 py-1 rounded-full bg-white/85 backdrop-blur-md text-[10px] font-semibold uppercase tracking-wider text-stone-800 border border-white/60 shadow-sm">
                   Limited Availability This Month
                 </span>
               </div>
             </div>
 
           </div>
-        </div>
+        </motion.div>
 
       </div>
     </section>

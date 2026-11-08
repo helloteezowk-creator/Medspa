@@ -1,5 +1,6 @@
 import React from 'react';
-import { ShieldCheck, Cpu, Sparkles, Check } from 'lucide-react';
+import { motion } from 'motion/react';
+import { ShieldCheck, Cpu } from 'lucide-react';
 import { businessConfig } from '../data/businessConfig';
 
 export const TechnologySection: React.FC = () => {
@@ -8,7 +9,13 @@ export const TechnologySection: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}
-        <div className="max-w-2xl mx-auto text-center mb-16">
+        <motion.div
+          initial={{ opacity: 0, y: 18 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-50px' }}
+          transition={{ duration: 0.6 }}
+          className="max-w-2xl mx-auto text-center mb-16"
+        >
           <div className="text-[11px] font-semibold tracking-[0.25em] text-[#A6855B] uppercase mb-2">
             Clinical Rigor & Equipment
           </div>
@@ -18,14 +25,19 @@ export const TechnologySection: React.FC = () => {
           <p className="text-sm text-stone-600 font-light mt-3">
             We invest exclusively in authentic, medical-grade platforms that provide predictable clinical results, maximum patient comfort, and proven safety records.
           </p>
-        </div>
+        </motion.div>
 
         {/* 4 Technology Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {businessConfig.technologies.map((tech, idx) => (
-            <div
+            <motion.div
               key={idx}
-              className="p-6 rounded-[24px] bg-[#FAF8F5] border border-[#EDE8E0] hover:border-[#C5A880]/60 transition-all duration-300 flex flex-col justify-between hover:shadow-md"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-40px' }}
+              transition={{ delay: idx * 0.1, duration: 0.5, ease: 'easeOut' }}
+              whileHover={{ y: -4 }}
+              className="p-6 rounded-[24px] bg-[#FAF8F5] border border-[#EDE8E0] hover:border-[#C5A880]/60 transition-all duration-300 flex flex-col justify-between hover:shadow-md cursor-default"
             >
               <div>
                 <div className="w-10 h-10 rounded-xl bg-white border border-[#EDE8E0] flex items-center justify-center text-[#B09167] mb-5 shadow-sm">
@@ -49,7 +61,7 @@ export const TechnologySection: React.FC = () => {
                 <ShieldCheck className="w-4 h-4 text-[#B09167]" />
                 <span>{tech.clearance}</span>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
 

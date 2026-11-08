@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { X, Calendar, Clock, Check, Sparkles, User, Phone, Mail, MapPin, CheckCircle2, ChevronRight, AlertCircle } from 'lucide-react';
+import { X, Calendar, Clock, Check, Sparkles, User, Phone, Mail, MapPin, CheckCircle2, ChevronRight, AlertCircle, Loader2 } from 'lucide-react';
 import { businessConfig, ServiceItem } from '../data/businessConfig';
 
 import { saveAppointmentToSupabase } from '../lib/supabase';
@@ -407,7 +407,10 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                   className="w-full py-4 rounded-full text-xs font-semibold tracking-wider text-white bg-[#C5A880] hover:bg-[#B09167] shadow-sm transition-all duration-200 active:scale-95 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
                 >
                   {isSubmitting ? (
-                    <span>CONFIRMING APPOINTMENT...</span>
+                    <span className="flex items-center gap-2">
+                      <Loader2 className="w-4 h-4 animate-spin text-white" />
+                      <span>CONFIRMING APPOINTMENT...</span>
+                    </span>
                   ) : (
                     <>
                       <Calendar className="w-4 h-4" />

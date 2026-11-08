@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Calculator, Sparkles, Check, ArrowRight, DollarSign, Calendar } from 'lucide-react';
-import { businessConfig, ServiceItem } from '../data/businessConfig';
+import { motion } from 'motion/react';
+import { Sparkles, Check, Calendar } from 'lucide-react';
 
 interface TreatmentCalculatorProps {
   onBookProtocol: (selectedServiceIds: string[]) => void;
@@ -45,7 +45,13 @@ export const TreatmentCalculator: React.FC<TreatmentCalculatorProps> = ({ onBook
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}
-        <div className="max-w-2xl mx-auto text-center mb-14">
+        <motion.div
+          initial={{ opacity: 0, y: 18 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-50px' }}
+          transition={{ duration: 0.6 }}
+          className="max-w-2xl mx-auto text-center mb-14"
+        >
           <div className="text-[11px] font-semibold tracking-[0.25em] text-[#A6855B] uppercase mb-2">
             Personalized Estimate & Financing
           </div>
@@ -55,12 +61,18 @@ export const TreatmentCalculator: React.FC<TreatmentCalculatorProps> = ({ onBook
           <p className="text-sm text-stone-600 font-light mt-3">
             Select your primary aesthetic priorities to explore synergistic treatment pairings, estimated investment, and flexible 0% APR monthly installments.
           </p>
-        </div>
+        </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
           {/* Left Column: Interactive Goal Selectors */}
-          <div className="lg:col-span-7 space-y-4">
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: '-40px' }}
+            transition={{ duration: 0.6 }}
+            className="lg:col-span-7 space-y-4"
+          >
             <div className="text-xs font-semibold text-stone-500 uppercase tracking-wider mb-2">
               Select Your Aesthetic Goals:
             </div>
@@ -75,7 +87,7 @@ export const TreatmentCalculator: React.FC<TreatmentCalculatorProps> = ({ onBook
                     onClick={() => toggleGoal(goal.id)}
                     className={`p-4 rounded-2xl text-left border transition-all duration-200 cursor-pointer flex items-center justify-between gap-3 ${
                       isSelected
-                        ? 'bg-white border-[#C5A880] shadow-sm ring-1 ring-[#C5A880]/30'
+                        ? 'bg-white border-[#C5A880] shadow-sm ring-1 ring-[#C5A880]/30 scale-[1.01]'
                         : 'bg-white/70 border-[#EDE8E0] hover:border-stone-400 hover:bg-white'
                     }`}
                   >
@@ -108,10 +120,16 @@ export const TreatmentCalculator: React.FC<TreatmentCalculatorProps> = ({ onBook
                 Tip: Combining treatments in a single clinical visit often maximizes results while qualifying for our multi-modality 10% privilege savings.
               </span>
             </div>
-          </div>
+          </motion.div>
 
           {/* Right Column: Protocol Summary & Investment Estimate Card */}
-          <div className="lg:col-span-5">
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: '-40px' }}
+            transition={{ duration: 0.6 }}
+            className="lg:col-span-5"
+          >
             <div className="p-6 sm:p-8 rounded-[28px] bg-white border border-[#EDE8E0] shadow-lumina-card">
               <div className="flex items-center justify-between pb-4 border-b border-[#EDE8E0]">
                 <div>
@@ -175,7 +193,7 @@ export const TreatmentCalculator: React.FC<TreatmentCalculatorProps> = ({ onBook
                 <button
                   type="button"
                   onClick={handleBookProtocol}
-                  className="w-full py-4 rounded-full text-xs font-semibold tracking-wider text-white bg-[#C5A880] hover:bg-[#B09167] shadow-sm transition-all duration-200 active:scale-95 flex items-center justify-center gap-2"
+                  className="w-full py-4 rounded-full text-xs font-semibold tracking-wider text-white bg-[#C5A880] hover:bg-[#B09167] shadow-sm transition-all duration-300 hover:scale-[1.02] active:scale-95 flex items-center justify-center gap-2 cursor-pointer"
                 >
                   <Calendar className="w-4 h-4" />
                   <span>BOOK THIS CUSTOM PROTOCOL</span>
@@ -188,7 +206,7 @@ export const TreatmentCalculator: React.FC<TreatmentCalculatorProps> = ({ onBook
               </div>
 
             </div>
-          </div>
+          </motion.div>
 
         </div>
 

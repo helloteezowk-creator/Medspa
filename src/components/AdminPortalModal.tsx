@@ -608,7 +608,15 @@ export const AdminPortalModal: React.FC<AdminPortalModalProps> = ({ isOpen, onCl
 
               {/* Table of Appointments */}
               <div className="bg-white rounded-2xl border border-[#EDE8E0] overflow-hidden shadow-2xs">
-                {filteredAppointments.length === 0 ? (
+                {loadingData ? (
+                  <div className="py-16 text-center space-y-3">
+                    <RefreshCw className="w-8 h-8 text-[#C5A880] animate-spin mx-auto" />
+                    <p className="text-sm font-semibold text-stone-800">Synchronizing with Supabase...</p>
+                    <p className="text-xs text-stone-500 font-light">
+                      Retrieving real-time patient appointments and consultations
+                    </p>
+                  </div>
+                ) : filteredAppointments.length === 0 ? (
                   <div className="py-16 text-center">
                     <FileText className="w-8 h-8 text-stone-300 mx-auto mb-2" />
                     <p className="text-sm font-semibold text-stone-800">No consultation requests found</p>
