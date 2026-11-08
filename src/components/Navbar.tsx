@@ -1,22 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { Phone, Menu, X, Calendar, Clock, ChevronRight, Lock, User, LogIn } from 'lucide-react';
+import { Phone, Menu, X, Calendar, Clock, ChevronRight } from 'lucide-react';
 import { businessConfig } from '../data/businessConfig';
-import { UserProfile } from '../services/firebaseService';
 
 interface NavbarProps {
   onOpenBooking: (serviceId?: string) => void;
   onOpenTour: () => void;
-  currentUser: UserProfile | null;
-  onLogin: () => void;
-  onOpenPatientPortal: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
   onOpenBooking,
   onOpenTour,
-  currentUser,
-  onLogin,
-  onOpenPatientPortal,
 }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -104,7 +97,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               ))}
             </nav>
 
-            {/* Zone 3: Direct Phone, Auth State & Consultation CTA */}
+            {/* Zone 3: Direct Phone & Consultation CTA */}
             <div className="flex items-center gap-2 sm:gap-3 xl:gap-4 shrink-0">
               
               {/* Phone display on wide screens */}
@@ -121,32 +114,6 @@ export const Navbar: React.FC<NavbarProps> = ({
                   {businessConfig.hours}
                 </span>
               </div>
-
-              {/* Patient Auth Trigger */}
-              {currentUser ? (
-                <button
-                  type="button"
-                  onClick={onOpenPatientPortal}
-                  className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold text-stone-800 bg-white border border-[#EDE8E0] hover:border-[#C5A880] transition-colors shadow-2xs shrink-0 cursor-pointer"
-                  title="Patient Portal & Appointments"
-                >
-                  <div className="w-4 h-4 rounded-full bg-[#C5A880] text-white flex items-center justify-center text-[9px]">
-                    {currentUser.displayName ? currentUser.displayName[0] : 'P'}
-                  </div>
-                  <span className="hidden xl:inline max-w-[80px] truncate">
-                    {currentUser.displayName?.split(' ')[0]}
-                  </span>
-                </button>
-              ) : (
-                <button
-                  type="button"
-                  onClick={onLogin}
-                  className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium text-stone-700 hover:text-stone-900 border border-[#EDE8E0] bg-white hover:bg-stone-50 transition-colors shrink-0 cursor-pointer"
-                >
-                  <User className="w-3.5 h-3.5 text-[#C5A880]" />
-                  <span>Sign In</span>
-                </button>
-              )}
 
               {/* Primary Consultation CTA */}
               <button
@@ -203,43 +170,6 @@ export const Navbar: React.FC<NavbarProps> = ({
                 >
                   <X className="w-5 h-5" />
                 </button>
-              </div>
-
-              {/* Patient Profile Bar in Mobile Drawer */}
-              <div className="py-3 border-b border-[#EDE8E0]">
-                {currentUser ? (
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setMobileMenuOpen(false);
-                      onOpenPatientPortal();
-                    }}
-                    className="w-full flex items-center justify-between p-2.5 rounded-xl bg-white border border-[#EDE8E0]"
-                  >
-                    <div className="flex items-center gap-2">
-                      <div className="w-6 h-6 rounded-full bg-[#C5A880] text-white flex items-center justify-center text-xs font-semibold">
-                        {currentUser.displayName ? currentUser.displayName[0] : 'P'}
-                      </div>
-                      <div className="text-left">
-                        <div className="text-xs font-semibold text-stone-900">{currentUser.displayName}</div>
-                        <div className="text-[10px] text-stone-400">View Consultations</div>
-                      </div>
-                    </div>
-                    <ChevronRight className="w-3.5 h-3.5 text-stone-400" />
-                  </button>
-                ) : (
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setMobileMenuOpen(false);
-                      onLogin();
-                    }}
-                    className="w-full flex items-center justify-center gap-2 py-2 px-3 rounded-xl bg-white border border-[#EDE8E0] text-xs font-medium text-stone-800"
-                  >
-                    <User className="w-3.5 h-3.5 text-[#C5A880]" />
-                    <span>Sign In with Google</span>
-                  </button>
-                )}
               </div>
 
               {/* Navigation Links */}

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Navbar } from './components/Navbar';
 import { HeroSection } from './components/HeroSection';
 import { TrustPillars } from './components/TrustPillars';
@@ -16,38 +16,16 @@ import { BookingModal } from './components/BookingModal';
 import { ClinicTourModal } from './components/ClinicTourModal';
 import { ServiceDetailModal } from './components/ServiceDetailModal';
 import { AdminPortalModal } from './components/AdminPortalModal';
-import { ReviewModal } from './components/ReviewModal';
-import { PatientPortalModal } from './components/PatientPortalModal';
 import { businessConfig, ServiceItem } from './data/businessConfig';
-import { subscribeAuth, loginWithGoogle, UserProfile } from './services/firebaseService';
 
 export default function App() {
-  const [currentUser, setCurrentUser] = useState<UserProfile | null>(null);
   const [bookingModalOpen, setBookingModalOpen] = useState(false);
   const [clinicTourModalOpen, setClinicTourModalOpen] = useState(false);
   const [adminPortalOpen, setAdminPortalOpen] = useState(false);
-  const [reviewModalOpen, setReviewModalOpen] = useState(false);
-  const [patientPortalOpen, setPatientPortalOpen] = useState(false);
   
   const [selectedService, setSelectedService] = useState<ServiceItem | null>(null);
   const [bookingPreSelectedId, setBookingPreSelectedId] = useState<string | undefined>(undefined);
   const [bookingPreSelectedIds, setBookingPreSelectedIds] = useState<string[] | undefined>(undefined);
-
-  // Subscribe to persistent Firebase authentication
-  useEffect(() => {
-    const unsub = subscribeAuth((user) => {
-      setCurrentUser(user);
-    });
-    return () => unsub();
-  }, []);
-
-  const handleLogin = async () => {
-    try {
-      await loginWithGoogle();
-    } catch (e) {
-      console.warn('Sign in cancelled or interrupted', e);
-    }
-  };
 
   const handleOpenBooking = (serviceId?: string) => {
     setBookingPreSelectedId(serviceId);
@@ -82,13 +60,10 @@ export default function App() {
   return (
     <div className="min-h-screen bg-[#FAF8F5] text-stone-900 flex flex-col font-sans selection:bg-[#C5A880]/30 selection:text-stone-900 w-full max-w-full overflow-x-hidden">
       
-      {/* 1. Sticky Navigation Header with Patient Auth State */}
+      {/* 1. Sticky Navigation Header */}
       <Navbar
         onOpenBooking={() => handleOpenBooking()}
         onOpenTour={() => setClinicTourModalOpen(true)}
-        currentUser={currentUser}
-        onLogin={handleLogin}
-        onOpenPatientPortal={() => setPatientPortalOpen(true)}
       />
 
       {/* Main Page Layout */}
@@ -103,7 +78,7 @@ export default function App() {
         {/* 3. Trust Indicators Bar */}
         <TrustPillars />
 
-        {/* 3.5. Clinical Medical Machine Slider (Faithfully matching user reference screenshot) */}
+        {/* 3.5. Clinical Medical Machine Slider */}
         <MachineShowcase
           onBookMachine={(machineName) => {
             if (machineName.includes('InfraBaldan')) {
@@ -124,16 +99,16 @@ export default function App() {
           onBookService={(id) => handleOpenBooking(id)}
         />
 
-        {/* 5. About Clinic Section (3-Column Layout from reference) */}
+        {/* 5. About Clinic Section */}
         <AboutClinic
           onOpenTour={() => setClinicTourModalOpen(true)}
           onOpenBooking={() => handleOpenBooking()}
         />
 
-        {/* 6. Treatment Journey (4-Step Sequential Approach) */}
+        {/* 6. Treatment Journey */}
         <TreatmentJourney />
 
-        {/* 7. Special Welcome Offer Banner (Macro Skin Glow) */}
+        {/* 7. Special Welcome Offer Banner */}
         <SpecialOfferBanner
           onClaimOffer={() => handleOpenBooking()}
         />
@@ -146,10 +121,8 @@ export default function App() {
           onBookProtocol={handleBookProtocol}
         />
 
-        {/* 10. Verified Patient Reviews with Write a Review & Live Backend Sync */}
-        <ReviewsSection
-          onOpenReviewModal={() => setReviewModalOpen(true)}
-        />
+        {/* 10. Verified Patient Reviews */}
+        <ReviewsSection />
 
         {/* 11. Frequently Asked Questions */}
         <FAQSection
@@ -157,7 +130,7 @@ export default function App() {
         />
       </main>
 
-      {/* 12. Footer */}
+      {/* 12. Footer with Admin Portal Access */}
       <Footer
         onOpenBooking={() => handleOpenBooking()}
         onSelectTreatment={handleSelectServiceById}
@@ -170,8 +143,6 @@ export default function App() {
         onClose={() => setBookingModalOpen(false)}
         preSelectedServiceId={bookingPreSelectedId}
         preSelectedServiceIds={bookingPreSelectedIds}
-        currentUser={currentUser}
-        onLogin={handleLogin}
       />
 
       <ClinicTourModal
@@ -189,21 +160,7 @@ export default function App() {
         }}
       />
 
-      <ReviewModal
-        isOpen={reviewModalOpen}
-        onClose={() => setReviewModalOpen(false)}
-        currentUser={currentUser}
-        onLogin={handleLogin}
-        onReviewSubmitted={() => setReviewModalOpen(false)}
-      />
-
-      <PatientPortalModal
-        isOpen={patientPortalOpen}
-        onClose={() => setPatientPortalOpen(false)}
-        currentUser={currentUser}
-        onBookNew={() => handleOpenBooking()}
-      />
-
+      {/* Supabase-Powered Admin Portal (Single Slot Protected) */}
       <AdminPortalModal
         isOpen={adminPortalOpen}
         onClose={() => setAdminPortalOpen(false)}
