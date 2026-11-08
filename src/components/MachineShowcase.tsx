@@ -16,34 +16,34 @@ export const MachineShowcase: React.FC<MachineShowcaseProps> = ({ onBookMachine 
       name: 'InfraBaldan 3.0™',
       subTitle: 'Infrared Metabolic Slimming Pod',
       headline: 'Synchronized Aerobic Movement & Infrared Photobiomodulation',
-      centerImage: '/src/assets/images/machine_infrabaldan_infrared_1794056127227.jpg',
+      centerImage: '/images/machine_infrabaldan_infrared_1794056127227.jpg',
       vignettes: [
         {
           id: 'v1',
-          image: '/src/assets/images/machine_red_light_action_1794056129311.jpg',
+          image: '/images/machine_red_light_action_1794056129311.jpg',
           title: 'Infrared Lamps',
           desc: 'Selected biological infrared rays activate lipolysis.',
         },
         {
           id: 'v2',
-          image: '/src/assets/images/treatment_body_contouring_1794044977358.jpg',
+          image: '/images/treatment_body_contouring_1794044977358.jpg',
           title: 'Aerobic Activation',
           desc: 'Targeted continuous pedaling accelerates fat burning.',
         },
         {
           id: 'v3',
-          image: '/src/assets/images/promo_macro_radiance_1794044958044.jpg',
+          image: '/images/promo_macro_radiance_1794044958044.jpg',
           title: 'Mitochondrial ATP',
           desc: 'Deep cellular photobiomodulation & tissue toning.',
         },
       ],
       leftPreview: {
         name: 'TriLaser™ Platform',
-        image: '/src/assets/images/machine_aesthetic_laser_tower_1794056127293.jpg',
+        image: '/images/machine_aesthetic_laser_tower_1794056127293.jpg',
       },
       rightPreview: {
         name: 'FibraDFA / Cryo-RF',
-        image: '/src/assets/images/machine_cryo_rf_tower_1794056128491.jpg',
+        image: '/images/machine_cryo_rf_tower_1794056128491.jpg',
       },
       description:
         'InfraBaldan 3.0 is a patented medical device that synchronizes gentle aerobic physical activity with selected infrared radiation. By maintaining heart rate in the aerobic fat-burning zone while bathing target zones in deep therapeutic infrared light, it re-educates metabolism to consume stubborn fat reserves.',
@@ -60,34 +60,34 @@ export const MachineShowcase: React.FC<MachineShowcaseProps> = ({ onBookMachine 
       name: 'TriLaser™ Medical Platform',
       subTitle: 'Triple-Wavelength Aesthetic Laser',
       headline: '755nm Alexandrite · 808nm Diode · 1064nm Nd:YAG Laser',
-      centerImage: '/src/assets/images/machine_aesthetic_laser_tower_1794056127293.jpg',
+      centerImage: '/images/machine_aesthetic_laser_tower_1794056127293.jpg',
       vignettes: [
         {
           id: 'v1',
-          image: '/src/assets/images/treatment_laser_rejuvenation_1794044956801.jpg',
+          image: '/images/treatment_laser_rejuvenation_1794044956801.jpg',
           title: 'Sapphire Chill-Tip',
           desc: 'Continuous -4°C contact cooling for painless pulses.',
         },
         {
           id: 'v2',
-          image: '/src/assets/images/machine_red_light_action_1794056129311.jpg',
+          image: '/images/machine_red_light_action_1794056129311.jpg',
           title: 'Multi-Depth Beam',
           desc: 'Targets superficial and deep hair follicle stems.',
         },
         {
           id: 'v3',
-          image: '/src/assets/images/hero_medspa_radiance_1794044954858.jpg',
+          image: '/images/hero_medspa_radiance_1794044954858.jpg',
           title: 'All Skin Types',
           desc: 'Safe for Fitzpatrick phototypes I through VI.',
         },
       ],
       leftPreview: {
         name: 'FibraDFA / Cryo-RF',
-        image: '/src/assets/images/machine_cryo_rf_tower_1794056128491.jpg',
+        image: '/images/machine_cryo_rf_tower_1794056128491.jpg',
       },
       rightPreview: {
         name: 'InfraBaldan 3.0™',
-        image: '/src/assets/images/machine_infrabaldan_infrared_1794056127227.jpg',
+        image: '/images/machine_infrabaldan_infrared_1794056127227.jpg',
       },
       description:
         'The TriLaser platform combines three distinct wavelengths into a single synchronized handpiece. By targeting follicle structures at varying anatomical depths simultaneously, it delivers superior hair clearance and epidermal smoothing with high patient comfort.',
@@ -104,34 +104,34 @@ export const MachineShowcase: React.FC<MachineShowcaseProps> = ({ onBookMachine 
       name: 'FibraDFA™ Cryo-RF Tower',
       subTitle: 'Thermal Shock & Multipolar RF',
       headline: 'Synergistic Deep Dermal Heating & Cryogenic Sculpting',
-      centerImage: '/src/assets/images/machine_cryo_rf_tower_1794056128491.jpg',
+      centerImage: '/images/machine_cryo_rf_tower_1794056128491.jpg',
       vignettes: [
         {
           id: 'v1',
-          image: '/src/assets/images/treatment_body_contouring_1794044977358.jpg',
+          image: '/images/treatment_body_contouring_1794044977358.jpg',
           title: 'Thermal Shock Head',
           desc: 'Contrast therapy triggers micro-vascular contraction.',
         },
         {
           id: 'v2',
-          image: '/src/assets/images/treatment_injectable_aesthetics_1794044956255.jpg',
+          image: '/images/treatment_injectable_aesthetics_1794044956255.jpg',
           title: 'Multipolar RF',
           desc: 'Contracts dermal collagen fibrils up to 15mm deep.',
         },
         {
           id: 'v3',
-          image: '/src/assets/images/treatment_hydrafacial_glow_1794044958347.jpg',
+          image: '/images/treatment_hydrafacial_glow_1794044958347.jpg',
           title: 'Vacuum Drainage',
           desc: 'Enhances lymphatic clearance and tissue detox.',
         },
       ],
       leftPreview: {
         name: 'InfraBaldan 3.0™',
-        image: '/src/assets/images/machine_infrabaldan_infrared_1794056127227.jpg',
+        image: '/images/machine_infrabaldan_infrared_1794056127227.jpg',
       },
       rightPreview: {
         name: 'TriLaser™ Platform',
-        image: '/src/assets/images/machine_aesthetic_laser_tower_1794056127293.jpg',
+        image: '/images/machine_aesthetic_laser_tower_1794056127293.jpg',
       },
       description:
         'FibraDFA Cryo-RF combines subdermal radiofrequency with thermal shock cooling to stimulate immediate collagen contraction and long-term neocollagenesis. Safely sculpts delicate facial contours and tones lax body tissues without surgical recovery.',
@@ -207,21 +207,21 @@ export const MachineShowcase: React.FC<MachineShowcaseProps> = ({ onBookMachine 
           </div>
 
           {/* MAIN PANORAMIC STAGE WITH 3 MACHINES AND CIRCULAR ACTION VIGNETTES */}
-          <div className="relative min-h-[380px] sm:min-h-[460px] lg:min-h-[500px] flex items-center justify-between">
+          <div className="relative min-h-[380px] sm:min-h-[460px] lg:min-h-[500px] flex flex-col md:flex-row items-center justify-center lg:justify-between gap-4 lg:gap-2">
             
             {/* LEFT MACHINE PREVIEW (Clickable to switch) */}
             <div
               onClick={handlePrev}
-              className="hidden lg:flex flex-col items-center justify-center w-1/5 opacity-50 hover:opacity-90 transition-opacity cursor-pointer select-none group"
+              className="hidden lg:flex flex-col items-center justify-center w-1/5 opacity-40 hover:opacity-95 transition-opacity cursor-pointer select-none group shrink-0"
             >
-              <div className="h-56 xl:h-64 w-full flex items-center justify-center">
+              <div className="h-56 xl:h-64 w-full flex items-center justify-center rounded-2xl overflow-hidden p-2">
                 <img
                   src={current.leftPreview.image}
                   alt={current.leftPreview.name}
-                  className="max-h-full max-w-full object-contain filter grayscale group-hover:grayscale-0 transition-all duration-300 pointer-events-none"
+                  className="max-h-full max-w-full object-contain mix-blend-multiply filter grayscale group-hover:grayscale-0 transition-all duration-300 pointer-events-none"
                 />
               </div>
-              <span className="text-xs text-stone-500 font-medium mt-3 text-center group-hover:text-stone-900">
+              <span className="text-xs text-stone-500 font-medium mt-3 text-center group-hover:text-stone-900 transition-colors">
                 {current.leftPreview.name}
               </span>
             </div>
@@ -231,90 +231,89 @@ export const MachineShowcase: React.FC<MachineShowcaseProps> = ({ onBookMachine 
               type="button"
               onClick={handlePrev}
               aria-label="Previous Machine"
-              className="absolute left-2 sm:left-4 lg:left-[22%] z-30 w-12 h-12 rounded-full bg-white/90 hover:bg-white text-stone-800 shadow-md border border-[#EDE8E0] flex items-center justify-center transition-all duration-200 hover:scale-105 active:scale-95 cursor-pointer"
+              className="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-white/95 hover:bg-white text-stone-800 shadow-md hover:shadow-lg border border-[#EDE8E0] flex items-center justify-center transition-all duration-200 hover:scale-105 active:scale-95 cursor-pointer shrink-0 z-20"
             >
               <ChevronLeft className="w-6 h-6 stroke-[2]" />
             </button>
 
-            {/* CENTER SPOTLIGHT STAGE (Circular spotlight with high-def machine and 3 circular action bubbles) */}
-            <div className="relative w-full lg:w-3/5 flex flex-col md:flex-row items-center justify-center gap-6 sm:gap-8 z-10 px-4 sm:px-8">
+            {/* CENTER SPOTLIGHT STAGE (Circular disk with fitted machine and zero sharp edges) */}
+            <div className="relative flex flex-col items-center justify-center shrink-0 my-2">
               
-              {/* Circular Spotlight Disk */}
-              <div className="relative w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 rounded-full bg-white shadow-inner border border-stone-200/60 flex items-center justify-center shrink-0">
+              {/* Circular Spotlight Disk Mask */}
+              <div className="relative w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 lg:w-[410px] lg:h-[410px] rounded-full bg-white shadow-xl border border-stone-200/80 flex items-center justify-center overflow-hidden">
                 
-                {/* Background decorative concentric ring */}
-                <div className="absolute inset-4 rounded-full bg-stone-50/70 border border-stone-100 pointer-events-none" />
+                {/* Background decorative concentric rings */}
+                <div className="absolute inset-2 sm:inset-3 rounded-full bg-[#FAF9F6] border border-stone-100 pointer-events-none" />
+                <div className="absolute inset-6 sm:inset-8 rounded-full border border-stone-200/50 pointer-events-none" />
 
-                {/* Machine product image isolated without glitching */}
-                <div className="relative z-10 w-full h-full p-6 flex items-center justify-center">
+                {/* Machine product image isolated and fitted inside circular mask */}
+                <div className="relative z-10 w-full h-full p-4 sm:p-6 md:p-8 flex items-center justify-center rounded-full overflow-hidden">
                   <img
                     key={current.id}
                     src={current.centerImage}
                     alt={current.name}
-                    className="max-h-full max-w-full object-contain transition-all duration-300 pointer-events-none"
-                    style={{ maxHeight: '85%', maxWidth: '85%' }}
+                    className="w-full h-full object-contain rounded-full mix-blend-multiply transition-all duration-300 pointer-events-none select-none"
                   />
                 </div>
-
-                {/* Machine Name Badge on circle */}
-                <div className="absolute -bottom-3 px-4 py-1.5 rounded-full bg-stone-900 text-white text-[11px] font-semibold tracking-wider uppercase shadow-md flex items-center gap-1.5 z-20">
-                  <ShieldCheck className="w-3.5 h-3.5 text-[#C5A880]" />
-                  <span>{current.name}</span>
-                </div>
               </div>
 
-              {/* 3 CIRCULAR ACTION VIGNETTES (Exact feature from user reference screenshot) */}
-              <div className="flex md:flex-col items-center justify-center gap-3 sm:gap-4 shrink-0">
-                {current.vignettes.map((v) => (
-                  <div
-                    key={v.id}
-                    className="group relative flex items-center gap-3"
-                    title={v.title}
-                  >
-                    <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full overflow-hidden border-2 border-white shadow-md ring-2 ring-[#EDE8E0] group-hover:ring-[#C5A880] transition-all duration-200 shrink-0 bg-stone-100">
-                      <img
-                        src={v.image}
-                        alt={v.title}
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300 pointer-events-none"
-                      />
-                    </div>
-                    <div className="hidden xl:block max-w-[130px]">
-                      <div className="text-[11px] font-semibold text-stone-900 leading-tight">
-                        {v.title}
-                      </div>
-                      <div className="text-[10px] text-stone-500 leading-tight mt-0.5 line-clamp-1">
-                        {v.desc}
-                      </div>
-                    </div>
-                  </div>
-                ))}
+              {/* Machine Name Badge on circle bottom - anchored cleanly outside overflow mask */}
+              <div className="absolute -bottom-3 px-4 py-1.5 rounded-full bg-stone-900 text-white text-[11px] font-semibold tracking-wider uppercase shadow-xl flex items-center gap-1.5 z-20 border border-stone-700">
+                <ShieldCheck className="w-3.5 h-3.5 text-[#C5A880]" />
+                <span>{current.name}</span>
               </div>
-
             </div>
 
-            {/* NEXT ARROW BUTTON `>` */}
+            {/* NEXT ARROW BUTTON `>` (Positioned cleanly between Center Circle and Vignettes) */}
             <button
               type="button"
               onClick={handleNext}
               aria-label="Next Machine"
-              className="absolute right-2 sm:right-4 lg:right-[22%] z-30 w-12 h-12 rounded-full bg-white/90 hover:bg-white text-stone-800 shadow-md border border-[#EDE8E0] flex items-center justify-center transition-all duration-200 hover:scale-105 active:scale-95 cursor-pointer"
+              className="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-white/95 hover:bg-white text-stone-800 shadow-md hover:shadow-lg border border-[#EDE8E0] flex items-center justify-center transition-all duration-200 hover:scale-105 active:scale-95 cursor-pointer shrink-0 z-20"
             >
               <ChevronRight className="w-6 h-6 stroke-[2]" />
             </button>
 
+            {/* 3 CIRCULAR ACTION VIGNETTES (Exact circular pattern from reference, stacked cleanly without button overlap) */}
+            <div className="flex md:flex-col items-center justify-center gap-3 sm:gap-4 shrink-0 z-10 mt-4 md:mt-0">
+              {current.vignettes.map((v) => (
+                <div
+                  key={v.id}
+                  className="group relative flex items-center gap-3 cursor-pointer"
+                  title={v.title}
+                >
+                  <div className="w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-full overflow-hidden border-2 border-white shadow-md ring-2 ring-[#EDE8E0] group-hover:ring-[#C5A880] transition-all duration-300 shrink-0 bg-stone-900">
+                    <img
+                      src={v.image}
+                      alt={v.title}
+                      className="w-full h-full object-cover rounded-full group-hover:scale-110 transition-transform duration-300 pointer-events-none select-none"
+                    />
+                  </div>
+                  <div className="hidden xl:block max-w-[120px]">
+                    <div className="text-[11px] font-semibold text-stone-900 leading-tight">
+                      {v.title}
+                    </div>
+                    <div className="text-[10px] text-stone-500 leading-tight mt-0.5 line-clamp-1">
+                      {v.desc}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
             {/* RIGHT MACHINE PREVIEW (Clickable to switch) */}
             <div
               onClick={handleNext}
-              className="hidden lg:flex flex-col items-center justify-center w-1/5 opacity-50 hover:opacity-90 transition-opacity cursor-pointer select-none group"
+              className="hidden lg:flex flex-col items-center justify-center w-1/5 opacity-40 hover:opacity-95 transition-opacity cursor-pointer select-none group shrink-0"
             >
-              <div className="h-56 xl:h-64 w-full flex items-center justify-center">
+              <div className="h-56 xl:h-64 w-full flex items-center justify-center rounded-2xl overflow-hidden p-2">
                 <img
                   src={current.rightPreview.image}
                   alt={current.rightPreview.name}
-                  className="max-h-full max-w-full object-contain filter grayscale group-hover:grayscale-0 transition-all duration-300 pointer-events-none"
+                  className="max-h-full max-w-full object-contain mix-blend-multiply filter grayscale group-hover:grayscale-0 transition-all duration-300 pointer-events-none"
                 />
               </div>
-              <span className="text-xs text-stone-500 font-medium mt-3 text-center group-hover:text-stone-900">
+              <span className="text-xs text-stone-500 font-medium mt-3 text-center group-hover:text-stone-900 transition-colors">
                 {current.rightPreview.name}
               </span>
             </div>

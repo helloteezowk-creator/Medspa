@@ -94,7 +94,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               {/* Portrait container with soft organic corners */}
               <div className="relative overflow-hidden rounded-[32px] sm:rounded-[40px] shadow-2xl border-4 border-white/80 aspect-[3/4]">
                 <img
-                  src="/src/assets/images/hero_medspa_radiance_1794044954858.jpg"
+                  src="/images/hero_medspa_radiance_1794044954858.jpg"
                   alt="Radiant glowing skin model at Lumina Medical Spa"
                   className="w-full h-full object-cover object-center transform hover:scale-[1.02] transition-transform duration-700"
                   referrerPolicy="no-referrer"

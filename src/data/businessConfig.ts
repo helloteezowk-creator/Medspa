@@ -157,7 +157,7 @@ export const businessConfig: BusinessConfig = {
       downtime: 'Zero downtime',
       idealFor: ['Enlarged pores', 'Dull complexion', 'Fine dehydration lines', 'Uneven texture'],
       popular: true,
-      image: '/src/assets/images/treatment_hydrafacial_glow_1794044958347.jpg',
+      image: '/images/treatment_hydrafacial_glow_1794044958347.jpg',
       benefits: ['Instant skin illumination', 'Painless blackhead extraction', 'Deep antioxidant nourishment', 'Safe for all skin types'],
     },
     {
@@ -172,7 +172,7 @@ export const businessConfig: BusinessConfig = {
       downtime: 'Immediate return to normal day',
       idealFor: ['Forehead furrows', 'Glabellar frown lines', 'Crow’s feet', 'Jaw slimming (masseter)'],
       popular: true,
-      image: '/src/assets/images/treatment_injectable_aesthetics_1794044956255.jpg',
+      image: '/images/treatment_injectable_aesthetics_1794044956255.jpg',
       benefits: ['Smoother expression lines', 'Prevents deep wrinkle etching', 'Preserves natural movement', 'Results last 3–4 months'],
     },
     {
@@ -187,7 +187,7 @@ export const businessConfig: BusinessConfig = {
       downtime: '1–2 days mild pinkness',
       idealFor: ['Collagen loss', 'Sun damage', 'Rough skin texture', 'Fine perioral lines'],
       popular: true,
-      image: '/src/assets/images/treatment_laser_rejuvenation_1794044956801.jpg',
+      image: '/images/treatment_laser_rejuvenation_1794044956801.jpg',
       benefits: ['Stimulates neocollagenesis', 'Evens skin tone and clarity', 'Tightens pore appearance', 'Restores natural bounce'],
     },
     {
@@ -202,7 +202,7 @@ export const businessConfig: BusinessConfig = {
       downtime: 'Zero downtime',
       idealFor: ['Abdomen & love handles', 'Inner/outer thighs', 'Submental chin fat', 'Upper arms'],
       popular: true,
-      image: '/src/assets/images/treatment_body_contouring_1794044977358.jpg',
+      image: '/images/treatment_body_contouring_1794044977358.jpg',
       benefits: ['Non-surgical fat reduction', 'Noticeable inch loss', 'Tightens adjacent skin', 'Permanent fat cell elimination'],
     },
     {
@@ -217,7 +217,7 @@ export const businessConfig: BusinessConfig = {
       downtime: 'Minor swelling (24–48h)',
       idealFor: ['Hollow cheeks', 'Thinning lips', 'Under-eye hollows', 'Receded jawline'],
       benefits: ['Instant subtle volume', 'Reversible and safe', 'Promotes dermal hydration', 'Results last 9–18 months'],
-      image: '/src/assets/images/treatment_injectable_aesthetics_1794044956255.jpg',
+      image: '/images/treatment_injectable_aesthetics_1794044956255.jpg',
     },
     {
       id: 'laser-hair-removal',
@@ -231,7 +231,7 @@ export const businessConfig: BusinessConfig = {
       downtime: 'Zero downtime',
       idealFor: ['Unwanted hair growth', 'Ingrown hairs & razor bumps', 'Smooth long-term maintenance'],
       benefits: ['Up to 90% permanent hair reduction', 'Built-in chill tip cooling', 'Safe across Fitzpatrick skin types I–VI', 'Softens skin texture'],
-      image: '/src/assets/images/treatment_laser_rejuvenation_1794044956801.jpg',
+      image: '/images/treatment_laser_rejuvenation_1794044956801.jpg',
     },
     {
       id: 'microneedling',
@@ -245,7 +245,7 @@ export const businessConfig: BusinessConfig = {
       downtime: '24 hours mild redness',
       idealFor: ['Acne scarring', 'Pore texture', 'Fine lines', 'Stretch marks'],
       benefits: ['Dramatically refines scar tissue', 'Enhances product absorption by 300%', 'Safe all year round', 'Improves skin thickness'],
-      image: '/src/assets/images/treatment_hydrafacial_glow_1794044958347.jpg',
+      image: '/images/treatment_hydrafacial_glow_1794044958347.jpg',
     },
     {
       id: 'chemical-peels',
@@ -259,7 +259,7 @@ export const businessConfig: BusinessConfig = {
       downtime: '1–4 days subtle flaking',
       idealFor: ['Melasma & hyperpigmentation', 'Sun spots', 'Rough dull skin', 'Congested acneic skin'],
       benefits: ['Fast radiant turnaround', 'Dissolves dead cellular buildup', 'Reduces pigment clusters', 'Smoothes superficial lines'],
-      image: '/src/assets/images/promo_macro_radiance_1794044958044.jpg',
+      image: '/images/promo_macro_radiance_1794044958044.jpg',
     },
     {
       id: 'skin-tightening',
@@ -273,7 +273,7 @@ export const businessConfig: BusinessConfig = {
       downtime: 'Zero downtime',
       idealFor: ['Mild jowling', 'Neck laxity', 'Post-pregnancy skin slack', 'Crepey skin around eyes'],
       benefits: ['Lifts and firms contours', 'Non-invasive and comfortable', 'Gradual natural tightening over 90 days', 'Pairs well with microneedling'],
-      image: '/src/assets/images/treatment_body_contouring_1794044977358.jpg',
+      image: '/images/treatment_body_contouring_1794044977358.jpg',
     },
     {
       id: 'acne-treatments',
@@ -287,7 +287,7 @@ export const businessConfig: BusinessConfig = {
       downtime: 'Zero downtime',
       idealFor: ['Adult acne', 'Hormonal cystic breakouts', 'Congested comedones', 'Post-acne red marks'],
       benefits: ['Eliminates acne-causing bacteria', 'Soothes systemic inflammation', 'Unclogs deep micro-comedones', 'Prevents recurring scarring'],
-      image: '/src/assets/images/treatment_hydrafacial_glow_1794044958347.jpg',
+      image: '/images/treatment_hydrafacial_glow_1794044958347.jpg',
     },
     {
       id: 'anti-aging-treatments',
@@ -301,7 +301,7 @@ export const businessConfig: BusinessConfig = {
       downtime: 'Zero downtime',
       idealFor: ['Tired, mature skin', 'Loss of facial tone', 'Deep dryness', 'Pre-event rejuvenation'],
       benefits: ['Immediate lifted contour effect', 'Boosts cellular ATP synthesis', 'Intensely plumps and hydrates', 'Gentle and deeply relaxing'],
-      image: '/src/assets/images/promo_macro_radiance_1794044958044.jpg',
+      image: '/images/promo_macro_radiance_1794044958044.jpg',
     },
     {
       id: 'facial-treatments',
@@ -315,7 +315,7 @@ export const businessConfig: BusinessConfig = {
       downtime: 'Zero downtime',
       idealFor: ['Sensitive skin', 'Seasonal dehydration', 'Skin barrier repair', 'Stress relief'],
       benefits: ['Restores moisture barrier', 'Promotes lymphatic detoxification', 'Customized active ingredients', 'Instant dewy glow'],
-      image: '/src/assets/images/treatment_hydrafacial_glow_1794044958347.jpg',
+      image: '/images/treatment_hydrafacial_glow_1794044958347.jpg',
     },
     {
       id: 'pigmentation-treatments',
@@ -329,7 +329,7 @@ export const businessConfig: BusinessConfig = {
       downtime: '2–3 days micro-crusting',
       idealFor: ['Stubborn dark spots', 'Melasma', 'Freckling', 'Photo-aging on face, neck, chest'],
       benefits: ['Clears chronic hyperpigmentation', 'Even, luminous complexion', 'Reverses visible sun damage', 'Precise melanin-targeting'],
-      image: '/src/assets/images/treatment_laser_rejuvenation_1794044956801.jpg',
+      image: '/images/treatment_laser_rejuvenation_1794044956801.jpg',
     },
     {
       id: 'laser-skin-treatments',
@@ -343,7 +343,7 @@ export const businessConfig: BusinessConfig = {
       downtime: '3–4 days bronzing',
       idealFor: ['Deep textural irregularities', 'Enlarged pores', 'Pigment combined with fine lines', 'Overall skin renewal'],
       benefits: ['Synergistic hybrid wavelength precision', 'Dramatic glow and clarity', 'Long-lasting collagen renewal', 'Customizable intensity'],
-      image: '/src/assets/images/treatment_laser_rejuvenation_1794044956801.jpg',
+      image: '/images/treatment_laser_rejuvenation_1794044956801.jpg',
     },
   ],
   technologies: [

@@ -21,25 +21,25 @@ export const ClinicTourModal: React.FC<ClinicTourModalProps> = ({
     {
       title: 'Flagship Reception & Concierge Sanctuary',
       subtitle: 'Serene travertine architecture, warm ambient cove lighting, and private check-in',
-      image: '/src/assets/images/clinic_interior_spa_1794044956038.jpg',
+      image: '/images/clinic_interior_spa_1794044956038.jpg',
       features: ['Acoustic soundproofing', 'Complimentary wellness teas', 'Zero waiting room exposure'],
     },
     {
       title: 'Advanced Medical Laser & Light Suite',
       subtitle: 'Equipped with Sciton BBL HERO™, Halo, and Candela Alexandrite technologies',
-      image: '/src/assets/images/treatment_laser_rejuvenation_1794044956801.jpg',
+      image: '/images/treatment_laser_rejuvenation_1794044956801.jpg',
       features: ['Dynamic chill-tip patient comfort', 'Certified laser safety optics', 'Medical HEPA ventilation'],
     },
     {
       title: 'Bespoke Injectable & Facial Suite',
       subtitle: 'Ergonomic treatment chairs with multi-axial adjustment and shadowless surgical lighting',
-      image: '/src/assets/images/treatment_injectable_aesthetics_1794044956255.jpg',
+      image: '/images/treatment_injectable_aesthetics_1794044956255.jpg',
       features: ['Multi-spectrum digital skin analysis', 'Physician-supervised protocols', 'Bespoke post-procedure soothing'],
     },
     {
       title: 'Body Contouring & Sculpting Pavilion',
       subtitle: 'Private relaxation environment for non-invasive fat freezing and skin firming',
-      image: '/src/assets/images/treatment_body_contouring_1794044977358.jpg',
+      image: '/images/treatment_body_contouring_1794044977358.jpg',
       features: ['Private streaming entertainment', 'Heated treatment surfaces', 'Zero-downtime recovery care'],
     },
   ];

@@ -57,7 +57,7 @@ export const SpecialOfferBanner: React.FC<SpecialOfferBannerProps> = ({ onClaimO
             {/* Right Photo Column: Macro Skin Glow */}
             <div className="lg:col-span-6 relative min-h-[300px] lg:min-h-full">
               <img
-                src="/src/assets/images/promo_macro_radiance_1794044958044.jpg"
+                src="/images/promo_macro_radiance_1794044958044.jpg"
                 alt="Radiant dewy skin close up at Lumina Medical Spa"
                 className="w-full h-full object-cover object-center absolute inset-0"
                 referrerPolicy="no-referrer"

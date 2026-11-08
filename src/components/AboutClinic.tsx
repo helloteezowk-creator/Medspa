@@ -17,7 +17,7 @@ export const AboutClinic: React.FC<AboutClinicProps> = ({ onOpenTour, onOpenBook
           <div className="lg:col-span-5 relative">
             <div className="relative overflow-hidden rounded-[32px] shadow-lg border border-[#EDE8E0] aspect-[4/3] bg-stone-100 group">
               <img
-                src="/src/assets/images/clinic_interior_spa_1794044956038.jpg"
+                src="/images/clinic_interior_spa_1794044956038.jpg"
                 alt="Lumina Medical Spa luxury reception and clinic lounge"
                 className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
                 referrerPolicy="no-referrer"
