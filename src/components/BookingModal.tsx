@@ -88,6 +88,14 @@ export const BookingModal: React.FC<BookingModalProps> = ({
     e.preventDefault();
     if (!validate()) return;
 
+    // Rate limiting: Prevent rapid spam submissions
+    const now = Date.now();
+    const lastSubTime = Number(sessionStorage.getItem('lumina_last_booking_ts') || '0');
+    if (now - lastSubTime < 15000) {
+      setErrors({ form: 'Please wait a moment before submitting another consultation request.' });
+      return;
+    }
+
     setIsSubmitting(true);
     const code = 'LUM-' + Math.floor(100000 + Math.random() * 900000);
     setConfirmationCode(code);
@@ -101,29 +109,25 @@ export const BookingModal: React.FC<BookingModalProps> = ({
     const clinicianObj = clinicians.find((c) => c.id === preferredClinician);
     const clinicianName = clinicianObj ? clinicianObj.name : 'First Available';
 
-    // Save to Supabase backend!
+    // Save to Supabase backend over secure TLS
     try {
       const result = await saveAppointmentToSupabase({
         reference_id: code,
-        full_name: fullName.trim(),
-        phone: phone.trim(),
-        email: email.trim(),
+        full_name: fullName.trim().slice(0, 100),
+        phone: phone.trim().slice(0, 25),
+        email: email.trim().slice(0, 100),
         preferred_date: selectedDate,
         preferred_time_slot: selectedTimeSlot,
         practitioner: clinicianName,
         services: serviceNames,
-        notes: notes.trim(),
+        notes: notes.trim().slice(0, 500),
         status: 'pending',
       });
 
-      if (result.success) {
-        setSupabaseSynced(true);
-      } else {
-        // Even if table needs initial setup, we have offline/localStorage backup
-        setSupabaseSynced(false);
-      }
-    } catch (err) {
-      console.error('Supabase booking save error:', err);
+      sessionStorage.setItem('lumina_last_booking_ts', String(now));
+      setSupabaseSynced(result.success);
+    } catch {
+      setSupabaseSynced(false);
     } finally {
       setIsSubmitting(false);
       setIsConfirmed(true);

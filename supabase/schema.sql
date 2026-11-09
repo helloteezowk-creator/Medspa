@@ -1,12 +1,12 @@
 -- ====================================================================
--- Lumina Medical Spa — Supabase Appointments & Single Admin Schema
--- Run this in your Supabase Dashboard SQL Editor (https://supabase.com/dashboard/project/rowniscxjvtyyyawadrs/sql)
+-- Lumina Medical Spa — Secure Supabase Schema & Row Level Security (RLS)
+-- Run this in your Supabase Dashboard SQL Editor (https://supabase.com/dashboard/project/<your-project-id>/sql)
 -- ====================================================================
 
 -- 1. APPOINTMENTS TABLE
 CREATE TABLE IF NOT EXISTS appointments (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
-  reference_id TEXT NOT NULL,
+  reference_id TEXT NOT NULL UNIQUE,
   full_name TEXT NOT NULL,
   phone TEXT NOT NULL,
   email TEXT NOT NULL,
@@ -15,14 +15,19 @@ CREATE TABLE IF NOT EXISTS appointments (
   practitioner TEXT,
   services JSONB DEFAULT '[]'::jsonb,
   notes TEXT,
-  status TEXT DEFAULT 'pending',
+  status TEXT DEFAULT 'pending' CHECK (status IN ('pending', 'confirmed', 'completed', 'cancelled')),
   created_at TIMESTAMPTZ DEFAULT now()
 );
 
--- Enable Row Level Security (RLS) on appointments
+-- Indexes for performance and sorting
+CREATE INDEX IF NOT EXISTS idx_appointments_created_at ON appointments(created_at DESC);
+CREATE INDEX IF NOT EXISTS idx_appointments_ref ON appointments(reference_id);
+
+-- Enforce Row Level Security (RLS) on appointments
 ALTER TABLE appointments ENABLE ROW LEVEL SECURITY;
 
--- Allow public web visitors to submit consultation requests
+-- Policy 1: Allow public web visitors to submit consultation requests (INSERT only)
+-- Anonymous visitors can submit their own booking request, but CANNOT read others' data
 DROP POLICY IF EXISTS "Allow public insert to appointments" ON appointments;
 CREATE POLICY "Allow public insert to appointments"
   ON appointments
@@ -30,25 +35,36 @@ CREATE POLICY "Allow public insert to appointments"
   TO anon, authenticated
   WITH CHECK (true);
 
--- Allow reading appointments for admin management
+-- Policy 2: Strictly restrict viewing appointments to AUTHENTICATED users (Admin)
+-- CRITICAL SECURITY: Anonymous public visitors CANNOT harvest or query patient PII
 DROP POLICY IF EXISTS "Allow read appointments" ON appointments;
-CREATE POLICY "Allow read appointments"
+DROP POLICY IF EXISTS "Allow authenticated read appointments" ON appointments;
+CREATE POLICY "Allow authenticated read appointments"
   ON appointments
   FOR SELECT
-  TO anon, authenticated
-  USING (true);
+  TO authenticated
+  USING (auth.role() = 'authenticated');
 
--- Allow updating appointment status
+-- Policy 3: Strictly restrict updating appointment status to AUTHENTICATED users
 DROP POLICY IF EXISTS "Allow update appointments" ON appointments;
-CREATE POLICY "Allow update appointments"
+DROP POLICY IF EXISTS "Allow authenticated update appointments" ON appointments;
+CREATE POLICY "Allow authenticated update appointments"
   ON appointments
   FOR UPDATE
-  TO anon, authenticated
-  USING (true)
-  WITH CHECK (true);
+  TO authenticated
+  USING (auth.role() = 'authenticated')
+  WITH CHECK (auth.role() = 'authenticated');
+
+-- Policy 4: Allow AUTHENTICATED administrators to delete or anonymize appointments (GDPR Right to be Forgotten)
+DROP POLICY IF EXISTS "Allow authenticated delete appointments" ON appointments;
+CREATE POLICY "Allow authenticated delete appointments"
+  ON appointments
+  FOR DELETE
+  TO authenticated
+  USING (auth.role() = 'authenticated');
 
 
--- 2. SINGLE ADMIN ACCOUNTS TABLE
+-- 2. SINGLE-SLOT ADMIN ACCOUNTS TABLE
 CREATE TABLE IF NOT EXISTS admin_accounts (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   email TEXT NOT NULL UNIQUE,
@@ -58,21 +74,35 @@ CREATE TABLE IF NOT EXISTS admin_accounts (
   created_at TIMESTAMPTZ DEFAULT now()
 );
 
--- Enable Row Level Security (RLS) on admin_accounts
+-- Enforce Row Level Security (RLS) on admin_accounts
 ALTER TABLE admin_accounts ENABLE ROW LEVEL SECURITY;
 
--- Allow initial single slot registration
+-- Policy 1: Allow single slot registration ONLY when the table is empty
+-- PostgreSQL database-level enforcement: Once 1 row exists, no further registration can ever occur
 DROP POLICY IF EXISTS "Allow insert admin_accounts" ON admin_accounts;
-CREATE POLICY "Allow insert admin_accounts"
+DROP POLICY IF EXISTS "Allow single slot insert admin_accounts" ON admin_accounts;
+CREATE POLICY "Allow single slot insert admin_accounts"
   ON admin_accounts
   FOR INSERT
   TO anon, authenticated
-  WITH CHECK (true);
+  WITH CHECK ((SELECT count(*) FROM admin_accounts) = 0);
 
--- Allow reading admin_accounts for verification
+-- Policy 2: Allow authenticated admins to view admin account verification
 DROP POLICY IF EXISTS "Allow select admin_accounts" ON admin_accounts;
-CREATE POLICY "Allow select admin_accounts"
+DROP POLICY IF EXISTS "Allow authenticated select admin_accounts" ON admin_accounts;
+CREATE POLICY "Allow authenticated select admin_accounts"
   ON admin_accounts
   FOR SELECT
-  TO anon, authenticated
-  USING (true);
+  TO authenticated
+  USING (auth.role() = 'authenticated');
+
+-- Public helper function to check if the single admin slot is taken WITHOUT exposing any table rows or emails
+CREATE OR REPLACE FUNCTION is_admin_slot_registered()
+RETURNS BOOLEAN
+LANGUAGE sql
+SECURITY DEFINER
+AS $$
+  SELECT EXISTS (SELECT 1 FROM admin_accounts);
+$$;
+
+GRANT EXECUTE ON FUNCTION is_admin_slot_registered() TO anon, authenticated;

@@ -19,6 +19,8 @@ import {
   ChevronDown,
   Sparkles,
   ExternalLink,
+  Trash2,
+  UserX,
 } from 'lucide-react';
 import {
   AppointmentRecord,
@@ -30,6 +32,8 @@ import {
   loginAdmin,
   getActiveAdminSession,
   logoutAdmin,
+  deleteAppointmentFromSupabase,
+  anonymizeAppointmentInSupabase,
 } from '../lib/supabase';
 
 interface AdminPortalModalProps {
@@ -93,8 +97,8 @@ export const AdminPortalModal: React.FC<AdminPortalModalProps> = ({ isOpen, onCl
       const res = await fetchAppointmentsFromSupabase();
       setAppointments(res.appointments);
       setTableSource(res.tableUsed || 'appointments');
-    } catch (err) {
-      console.error('Error fetching appointments:', err);
+    } catch {
+      // Keep errors internal and silent to client console
     } finally {
       setLoadingData(false);
     }
@@ -112,8 +116,8 @@ export const AdminPortalModal: React.FC<AdminPortalModalProps> = ({ isOpen, onCl
       setAuthError('Please enter a valid email address.');
       return;
     }
-    if (password.length < 6) {
-      setAuthError('Password must be at least 6 characters.');
+    if (password.length < 8 || !/[A-Z]/.test(password) || !/[0-9]/.test(password)) {
+      setAuthError('Password must be at least 8 characters with at least one uppercase letter and one number.');
       return;
     }
     if (password !== confirmPassword) {
@@ -181,6 +185,72 @@ export const AdminPortalModal: React.FC<AdminPortalModalProps> = ({ isOpen, onCl
     setTimeout(() => setFeedbackMsg(''), 3000);
   };
 
+  const handleDeleteAppointment = async (booking: AppointmentRecord) => {
+    if (!window.confirm(`Are you sure you want to permanently delete appointment ${booking.reference_id}? This action cannot be undone.`)) {
+      return;
+    }
+    const targetKey = booking.id || booking.reference_id;
+    setUpdatingId(booking.reference_id);
+    const res = await deleteAppointmentFromSupabase(targetKey);
+    setUpdatingId(null);
+    if (res.success) {
+      setAppointments((prev) => prev.filter((item) => item.reference_id !== booking.reference_id));
+      if (selectedAppointment?.reference_id === booking.reference_id) {
+        setSelectedAppointment(null);
+      }
+      setFeedbackMsg(`Permanently deleted record ${booking.reference_id}`);
+      setTimeout(() => setFeedbackMsg(''), 3000);
+    } else {
+      setFeedbackMsg(res.error || 'Failed to delete record.');
+      setTimeout(() => setFeedbackMsg(''), 4000);
+    }
+  };
+
+  const handleAnonymizeAppointment = async (booking: AppointmentRecord) => {
+    if (!window.confirm(`Anonymize patient personal data for ${booking.reference_id} under GDPR Right to Erasure? Name, email, phone, and clinical notes will be irreversibly erased.`)) {
+      return;
+    }
+    const targetKey = booking.id || booking.reference_id;
+    setUpdatingId(booking.reference_id);
+    const res = await anonymizeAppointmentInSupabase(targetKey);
+    setUpdatingId(null);
+    if (res.success) {
+      const anonymizedFields = {
+        full_name: '[ANONYMIZED PATIENT]',
+        email: 'erased@anonymized.invalid',
+        phone: '[ERASED]',
+        notes: '[GDPR RIGHT TO ERASURE EXERCISED - PII REMOVED]',
+      };
+      setAppointments((prev) =>
+        prev.map((item) =>
+          item.reference_id === booking.reference_id
+            ? { ...item, ...anonymizedFields }
+            : item
+        )
+      );
+      if (selectedAppointment?.reference_id === booking.reference_id) {
+        setSelectedAppointment((prev) =>
+          prev ? { ...prev, ...anonymizedFields } : null
+        );
+      }
+      setFeedbackMsg(`Patient PII successfully anonymized for ${booking.reference_id}`);
+      setTimeout(() => setFeedbackMsg(''), 3000);
+    } else {
+      setFeedbackMsg(res.error || 'Failed to anonymize record.');
+      setTimeout(() => setFeedbackMsg(''), 4000);
+    }
+  };
+
+  const sanitizeCSVCell = (val: string | undefined | null): string => {
+    if (!val) return '""';
+    let str = String(val).replace(/"/g, '""');
+    // Prevent CSV formula injection (DDE attacks)
+    if (/^[=+@\-\t\r]/.test(str)) {
+      str = "'" + str;
+    }
+    return `"${str}"`;
+  };
+
   const handleExportCSV = () => {
     if (appointments.length === 0) return;
 
@@ -199,17 +269,17 @@ export const AdminPortalModal: React.FC<AdminPortalModalProps> = ({ isOpen, onCl
     ];
 
     const rows = appointments.map((a) => [
-      `"${a.reference_id}"`,
-      `"${a.full_name}"`,
-      `"${a.phone}"`,
-      `"${a.email}"`,
-      `"${a.preferred_date}"`,
-      `"${a.preferred_time_slot}"`,
-      `"${a.practitioner}"`,
-      `"${(a.services || []).join(', ')}"`,
-      `"${a.status}"`,
-      `"${a.created_at}"`,
-      `"${(a.notes || '').replace(/"/g, '""')}"`,
+      sanitizeCSVCell(a.reference_id),
+      sanitizeCSVCell(a.full_name),
+      sanitizeCSVCell(a.phone),
+      sanitizeCSVCell(a.email),
+      sanitizeCSVCell(a.preferred_date),
+      sanitizeCSVCell(a.preferred_time_slot),
+      sanitizeCSVCell(a.practitioner),
+      sanitizeCSVCell((a.services || []).join(', ')),
+      sanitizeCSVCell(a.status),
+      sanitizeCSVCell(a.created_at),
+      sanitizeCSVCell(a.notes || ''),
     ]);
 
     const csvContent = [headers.join(','), ...rows.map((r) => r.join(','))].join('\n');
@@ -742,6 +812,24 @@ export const AdminPortalModal: React.FC<AdminPortalModalProps> = ({ isOpen, onCl
                                 >
                                   <FileText className="w-4 h-4" />
                                 </button>
+
+                                <button
+                                  type="button"
+                                  onClick={() => handleAnonymizeAppointment(booking)}
+                                  className="p-1.5 rounded-lg text-amber-600 hover:text-amber-800 hover:bg-amber-50 transition-colors"
+                                  title="GDPR Right to Erasure: Anonymize Patient PII"
+                                >
+                                  <UserX className="w-4 h-4" />
+                                </button>
+
+                                <button
+                                  type="button"
+                                  onClick={() => handleDeleteAppointment(booking)}
+                                  className="p-1.5 rounded-lg text-rose-500 hover:text-rose-700 hover:bg-rose-50 transition-colors"
+                                  title="Permanently Delete Appointment"
+                                >
+                                  <Trash2 className="w-4 h-4" />
+                                </button>
                               </div>
                             </td>
                           </tr>
@@ -834,11 +922,31 @@ export const AdminPortalModal: React.FC<AdminPortalModalProps> = ({ isOpen, onCl
                 </div>
               </div>
 
-              <div className="pt-2 flex justify-end">
+              <div className="pt-3 border-t border-[#EDE8E0] flex flex-wrap items-center justify-between gap-2">
+                <div className="flex items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={() => handleAnonymizeAppointment(selectedAppointment)}
+                    className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-medium text-amber-700 bg-amber-50 hover:bg-amber-100 border border-amber-200 transition-colors"
+                    title="Anonymize patient personal data in database"
+                  >
+                    <UserX className="w-3.5 h-3.5" />
+                    <span>GDPR Anonymize</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => handleDeleteAppointment(selectedAppointment)}
+                    className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-medium text-rose-700 bg-rose-50 hover:bg-rose-100 border border-rose-200 transition-colors"
+                    title="Permanently purge appointment from database"
+                  >
+                    <Trash2 className="w-3.5 h-3.5" />
+                    <span>Delete Record</span>
+                  </button>
+                </div>
                 <button
                   type="button"
                   onClick={() => setSelectedAppointment(null)}
-                  className="px-5 py-2.5 rounded-full text-xs font-semibold bg-stone-900 text-white hover:bg-stone-800"
+                  className="px-5 py-2.5 rounded-full text-xs font-semibold bg-stone-900 text-white hover:bg-stone-800 transition-colors"
                 >
                   Close Dossier
                 </button>

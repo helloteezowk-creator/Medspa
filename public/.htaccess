@@ -1,15 +1,30 @@
+# ====================================================================
+# Lumina Medical Spa — Production Apache/LiteSpeed Configuration
+# Optimized for Hostinger Web Hosting with Enhanced Security Headers
+# ====================================================================
+
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteBase /
 
-  # 1. Allow existing static assets (images, css, js, fonts) to load directly
+  # 1. Block access to hidden files and sensitive configuration files
+  RewriteRule ^\.(?!well-known/) - [F,L]
+  RewriteRule ^(\.env|\.git|package\.json|tsconfig\.json) - [F,L]
+
+  # 2. Allow existing static assets (images, css, js, fonts) to load directly
   RewriteCond %{REQUEST_FILENAME} -f [OR]
   RewriteCond %{REQUEST_FILENAME} -d
   RewriteRule ^ - [L]
 
-  # 2. Redirect all other route requests to index.html for React SPA
+  # 3. Redirect all other route requests to index.html for React SPA
   RewriteRule ^ index.html [L]
 </IfModule>
+
+# Block direct access to hidden files
+<FilesMatch "^\.">
+  Order allow,deny
+  Deny from all
+</FilesMatch>
 
 # Enable Browser Caching for optimal performance
 <IfModule mod_expires.c>
@@ -23,9 +38,23 @@
   ExpiresByType application/javascript "access plus 1 month"
 </IfModule>
 
-# Security Headers
+# Comprehensive Security Headers
 <IfModule mod_headers.c>
+  # Prevent MIME-type sniffing
   Header set X-Content-Type-Options "nosniff"
-  Header set X-XSS-Protection "1; mode=block"
+
+  # Prevent clickjacking / iFrame embedding outside authorized host
+  Header set X-Frame-Options "DENY"
+
+  # Enforce HTTPS with HSTS (1 year max-age, includes subdomains)
+  Header set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+
+  # Referrer policy to prevent sensitive URL leakage
   Header set Referrer-Policy "strict-origin-when-cross-origin"
+
+  # Restrict browser feature permissions
+  Header set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=()"
+
+  # Content Security Policy (CSP) restricting scripts, styles, fonts, and Supabase connections
+  Header set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https: blob:; connect-src 'self' https://*.supabase.co wss://*.supabase.co; frame-ancestors 'none'; object-src 'none'; base-uri 'self';"
 </IfModule>
